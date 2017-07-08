@@ -1,4 +1,4 @@
-package com.choa.test;
+package com.intranet.test;
 
 import java.text.DateFormat;
 import java.util.Date;

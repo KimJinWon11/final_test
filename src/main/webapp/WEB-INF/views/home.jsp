@@ -8,7 +8,7 @@
 <h1>
 	Hello world!  
 </h1>
-
+	<a href="empList">go</a>
 <P>  The time on the server is ${serverTime}.hahaha </P>
 </body>
 </html>
