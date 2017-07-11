@@ -7,7 +7,7 @@ public class ListInfo {
 	
 	//row
 	private String search;
-	private String find;
+	private String kind;
 	private int startRow;
 	private int lastRow;
 	
@@ -112,10 +112,10 @@ public class ListInfo {
 		this.search = search;
 	}
 	public String getFind() {
-		return find;
+		return kind;
 	}
 	public void setFind(String find) {
-		this.find = find;
+		this.kind = find;
 	}
 	
 	
