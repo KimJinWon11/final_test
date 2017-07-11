@@ -5,44 +5,27 @@
 
 <html>
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<title>Home</title>
-	<script type="text/javascript">
-		$(function () {
-			$("#btn").click(function () {
-				window.open("empList", "search", "width=400, heigth=500, scrollbars=yes");
-			});
-		});
-		
-	</script>
+
+	<c:import url="/resources/css/main.jsp"></c:import>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-	<input type="button" value="search" id="btn">
-	<div id="emp_num">
-	
-	</div>
-	<div id="emp_name">
-	
-	</div>
-	<div id="emp_grade">
-	
-	</div>
-	<div id="dept_name">
-	
-	</div>
-	<c:if test="${dto!=null}">
-		<c:forEach items="${dto}" var="dto">
-			<p>${dto.emp_name}</p>
-		</c:forEach>
-	</c:if>
+	<section id="main_img">
+		<h1>INTRANET</h1>
+		
+		<div ID="login_menu">
+		<h1>LOGIN</h1>
+			<div id="login_form">
+				<p>ID:&nbsp;&nbsp;&nbsp;<input type="text" id="id" name="id"></p>
+				<p>PW: <input type="text" id="pw" name="pw"></p>
+				<input type="button" id="btn" class="btn-default" value="LOGIN">
+			</div>
+		</div>
+		<div id="main_title">
+			
+		</div>
+	</section>
 
-	<a href="empList">go</a>
-	<a href="product/productList">product</a>
 
-<P>  The time on the server is ${serverTime}.hahaha </P>
 
 </body>
 </html>
