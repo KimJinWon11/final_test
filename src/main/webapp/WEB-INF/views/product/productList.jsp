@@ -6,19 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<form action="productInsert">
-
-거래처 : <input type="text" name="outsourcing"> 
-제품명 : <input type="text" name="item">
-가격 : <input type="number" name="price">
-수량 : <input type="number" name="count">
-날짜 : <input type="date" name="in_date">
-
-<button>입력</button>
-
-
+<form action="productInsert" method="get">
+  <input list="outsourcings" name="outsourcing" id="test">
+  <datalist id="outsourcings">
+  <c:forEach items="${list}" var="dto">
+    <option value="${dto.outsourcing }">
+  </c:forEach>
+  </datalist>
+  <input type="button" value="gogo">
 </form>
 
 <div>
@@ -39,4 +37,12 @@
 
 
 </body>
+<script type="text/javascript">
+
+$("#test").keypress(function(){
+	
+});
+
+</script>
+
 </html>
