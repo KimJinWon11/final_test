@@ -3,12 +3,24 @@
 <html>
 <head>
 	<title>Home</title>
+	<c:import url="/resources/css/main.jsp"></c:import>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-	<a href="empList">go</a>
-<P>  The time on the server is ${serverTime}.hahaha </P>
+	<section id="main_img">
+		<h1>INTRANET</h1>
+		
+		<div ID="login_menu">
+		<h1>LOGIN</h1>
+			<div id="login_form">
+				<p>ID:&nbsp;&nbsp;&nbsp;<input type="text" id="id" name="id"></p>
+				<p>PW: <input type="text" id="pw" name="pw"></p>
+				<input type="button" id="btn" class="btn-default" value="LOGIN">
+			</div>
+		</div>
+		<div id="main_title">
+			
+		</div>
+	</section>
+
 </body>
 </html>
