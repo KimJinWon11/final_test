@@ -6,8 +6,8 @@
   <mapper namespace="EmpMapper">
   		<sql id="kind">
  		<trim prefix="where" prefixOverrides="and || or">
- 		<if test='kind == null'>
- 			emp_name like '%'||#{search}||'%'	
+ 		<if test='kind == ""'>
+ 			emp_name like '%'||#{search}||'%'
  		</if>
  		<if test='kind == "m"'>
  			emp_name like '%'||#{search}||'%' and dept_name='m'

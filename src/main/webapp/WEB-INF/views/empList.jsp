@@ -14,11 +14,32 @@
 			frm.submit();
 		})
 		$("#btn2").click(function () {
-			var checkArray = [];
-			$("input[name='ch']:checked").each(function () {
-				checkArray.push($(this).val());
+			var emp_num = [];
+			$("input[name='ch']:checked").parent().siblings(".c1").each(function () {
+				emp_num.push($(this).attr("title"));
 			});
-			frm2.submit();
+			var emp_name = [];
+			$("input[name='ch']:checked").parent().siblings(".c2").each(function () {
+				emp_name.push($(this).attr("title"));
+			});
+			var emp_grade = [];
+			$("input[name='ch']:checked").parent().siblings(".c3").each(function () {
+				emp_grade.push($(this).attr("title"));
+			});
+			var dept_name = [];
+			$("input[name='ch']:checked").parent().siblings(".c4").each(function () {
+				dept_name.push($(this).attr("title"));
+			});
+			
+			/* for (var i = 0; i < checkArray.length; i++) {
+				alert(checkArray[i].emp_num);
+			} */
+			for (var i = 0; i < emp_num.length; i++) {
+				$(opener.document).find("#emp_num").append(emp_num[i]); 
+				$(opener.document).find("#emp_name").append(emp_name[i]); 
+				$(opener.document).find("#emp_grade").append(emp_grade[i]); 
+				$(opener.document).find("#dept_name").append(dept_name[i]); 
+			}
 		})
 	})
   
@@ -54,16 +75,16 @@
 			
 			<c:forEach items="${list}" var="dto">
 				<tr>
-					<td>${dto.emp_num }</td>
-					<td>${dto.emp_name}</td>
+					<td class="c1" title="${dto.emp_num }">${dto.emp_num }</td>
+					<td class="c2" title="${dto.emp_name }">${dto.emp_name}</td>
 					<td>${dto.emp_age }</td>
-					<td>${dto.emp_grade }</td>
+					<td class="c3" title="${dto.emp_grade }">${dto.emp_grade }</td>
 					<c:if test="${dto.dept_name==null }"><td></td></c:if>
-					<c:if test="${dto.dept_name=='n' }"><td>프로젝트</td></c:if>
-					<c:if test="${dto.dept_name=='h' }"><td>인사과</td></c:if>
-					<c:if test="${dto.dept_name=='m' }"><td>총무과</td></c:if>
+					<c:if test="${dto.dept_name=='n' }"><td class="c4" title="프로젝트">프로젝트</td></c:if>
+					<c:if test="${dto.dept_name=='h' }"><td class="c4" title="인사과">인사과</td></c:if>
+					<c:if test="${dto.dept_name=='m' }"><td class="c4" title="총무과">총무과</td></c:if>
 					<td>${dto.emp_hiredate }</td>
-					<td><input type="checkbox" name="ch" value="${dto.emp_num}"> </td>
+					<td title="haha"><input type="checkbox" name="ch"> </td>
 				</tr>
 			</c:forEach>
 			</table>

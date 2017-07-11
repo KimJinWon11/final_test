@@ -21,7 +21,16 @@
 	Hello world!  
 </h1>
 	<input type="button" value="search" id="btn">
-	<div id="t1">
+	<div id="emp_num">
+	
+	</div>
+	<div id="emp_name">
+	
+	</div>
+	<div id="emp_grade">
+	
+	</div>
+	<div id="dept_name">
 	
 	</div>
 	<c:if test="${dto!=null}">
