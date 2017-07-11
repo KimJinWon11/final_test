@@ -38,6 +38,10 @@
 			<p>${dto.emp_name}</p>
 		</c:forEach>
 	</c:if>
+
+	<a href="empList">go</a>
+	<a href="product/productList">product</a>
+
 <P>  The time on the server is ${serverTime}.hahaha </P>
 
 </body>
