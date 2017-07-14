@@ -41,7 +41,7 @@
 	    /* margin-left: 55%; */
 	    
 	    /* border-radius: 5%; */
-	    color: white;
+	    
 	    background: linear-gradient(to bottom, rgba(0, 0, 26, .8) 50%, rgba(115, 115, 115, .8)) 60% fixed;
 	    box-shadow: 5px 5px 5px 0px #333333;
 	    display: inline-block;
@@ -57,13 +57,13 @@
 	    /* margin-bottom: 20%; */
 	}
 	#login_form{
-		position: absolute;
+	    position: absolute;
 	    width: 40%;
-	    height: 40%;
+	    /* height: 40%; */
 	    /* background-color: white; */
 	    float: left;
 	    padding: 2%;
-	    margin-top: 4%;
+	    margin-top: 2.5%;
 	    margin-left: 2%;
 	    border-radius: 1rem;
 	    border: soild, 2px, white;
@@ -73,9 +73,13 @@
 	}
 	
 	#login_menu p{
-		display: inline-block;
+	    display: inline-block;
 	    padding: 2%;
+	    color: white;
 	    text-shadow: 2px 2px #333333;
+	}
+	#login_menu input{
+		color:black;
 	}
 	#btn{
 		position: absolute;
@@ -90,7 +94,3 @@
 	    
 </style>
 </head>
-<body>
-
-</body>
-</html>
