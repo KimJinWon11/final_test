@@ -3,6 +3,8 @@ package com.intranet.util;
 public class ListSearch {
 	private String kind;
 	private String search;
+	
+	
 	public String getKind() {
 		return kind;
 	}

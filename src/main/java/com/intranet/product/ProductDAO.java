@@ -1,6 +1,8 @@
 package com.intranet.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -16,18 +18,36 @@ public class ProductDAO {
 	
 	
 	
-public List<ProductDTO> productList()throws Exception{
+public List<ProductDTO> productList(String in_date)throws Exception{
 		
 	
 		
-	return sqlSession.selectList(NAMESPACE+"list");	
+	return sqlSession.selectList(NAMESPACE+"list", in_date);	
+	
+	}
+public List<ProductDTO> outsourcingList()throws Exception{
+	
+	
+	
+	return sqlSession.selectList(NAMESPACE+"outsourcingList");	
+	
+	}
+public List<ProductDTO> itemList(String outsourcing)throws Exception{
+	
+	
+	
+	return sqlSession.selectList(NAMESPACE+"itemList",outsourcing);	
 	
 	}
 public int productInsert(ProductDTO productDTO)throws Exception{
 	
-	int result = sqlSession.insert(NAMESPACE+"insert", productDTO);
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("productDTO", productDTO);
+	sqlSession.insert(NAMESPACE+"insert",map);
+	int result = (Integer)map.get("result");
 	
 	return result;
+	
 }
 
 	

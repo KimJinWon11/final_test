@@ -3,12 +3,23 @@ package com.intranet.product;
 import java.sql.Date;
 
 public class ProductDTO {
+	private int num;
 	private String outsourcing;
 	private String item;
 	private int price;
 	private int count;
 	private Date in_date;
-	private int totalcount;
+	private int total_count;
+	private int total_price;
+	
+	
+	public int getNum() {
+		return num;
+	}
+	
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getOutsourcing() {
 		return outsourcing;
 	}
@@ -39,12 +50,19 @@ public class ProductDTO {
 	public void setIn_date(Date in_date) {
 		this.in_date = in_date;
 	}
-	public int getTotalcount() {
-		return totalcount;
+	public int getTotal_count() {
+		return total_count;
 	}
-	public void setTotalcount(int totalcount) {
-		this.totalcount = totalcount;
+	public void setTotal_count(int total_count) {
+		this.total_count = total_count;
 	}
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
+
 	
 	
 	

@@ -14,11 +14,26 @@ public class ProductService {
 	private ProductDAO productDAO;
 	
 	
-	public List<ProductDTO> productList()throws Exception{
+	public List<ProductDTO> productList(String in_date)throws Exception{
 		
 		
-		return productDAO.productList();
+		return productDAO.productList(in_date);
 	}
+	
+	public List<ProductDTO> outsourcingList()throws Exception{
+		
+		
+		
+		return productDAO.outsourcingList();	
+		
+		}
+	public List<ProductDTO> itemList(String outsourcing)throws Exception{
+		
+		
+		
+		return productDAO.itemList(outsourcing);	
+		
+		}
 	
 	public int productInsert(ProductDTO productDTO)throws Exception{
 		
