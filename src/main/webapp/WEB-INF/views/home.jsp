@@ -40,7 +40,7 @@
 	</c:if>
 
 	<a href="empList">go</a>
-	<a href="product/productList">product</a>
+	<a href="product/productList?y=2017&m=07">product</a>
 
 <P>  The time on the server is ${serverTime}.hahaha </P>
 

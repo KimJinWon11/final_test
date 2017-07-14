@@ -5,16 +5,31 @@
   
   <mapper namespace="ProductMapper">
   
-  <insert id="insert" parameterType="com.intranet.product.ProductDTO">
+  <resultMap type="com.intranet.product.ProductDTO" id="myProduct">
   
-  insert into product values(#{outsourcing},#{item},#{price},#{count},#{in_date})
+  </resultMap>
+  
+  <insert id="insert" statementType="CALLABLE" parameterType="java.util.Map">
+  
+  { call productinsert(#{productDTO.outsourcing, mode=IN}, #{productDTO.item, mode=IN}, #{productDTO.price, mode=IN}, #{productDTO.count, mode=IN}, #{productDTO.total_price, mode=IN}, #{result, mode=OUT, javaType=int, jdbcType=INTEGER}) }
   
   </insert>
   
-  <select id="list" resultType="com.intranet.product.ProductDTO">
+ 
+  <select id="list" resultType="com.intranet.product.ProductDTO" parameterType="java.lang.String">
   
-  select * from product
+  select * from product where in_date like '%'||#{in_date}||'%' order by in_date asc, num asc
   
+  </select>
+  
+  <select id="outsourcingList" resultType="com.intranet.product.ProductDTO">
+  
+  select distinct outsourcing from stock
+  	
+  </select>
+  
+  <select id="itemList" parameterType="java.lang.String" resultType="com.intranet.product.ProductDTO">
+  	select item from stock where outsourcing=#{outsourcing}
   </select>
   
 
