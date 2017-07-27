@@ -8,9 +8,12 @@ public class ProductDTO {
 	private String item;
 	private int price;
 	private int count;
-	private Date in_date;
+	private String in_date;
 	private int total_count;
 	private int total_price;
+	private String search;	
+	private Date r_date;
+	
 	
 	
 	public int getNum() {
@@ -44,12 +47,17 @@ public class ProductDTO {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public Date getIn_date() {
+
+
+	
+	public String getIn_date() {
 		return in_date;
 	}
-	public void setIn_date(Date in_date) {
+
+	public void setIn_date(String in_date) {
 		this.in_date = in_date;
 	}
+
 	public int getTotal_count() {
 		return total_count;
 	}
@@ -63,6 +71,32 @@ public class ProductDTO {
 		this.total_price = total_price;
 	}
 
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+
+
+	public Date getR_date() {
+		return r_date;
+	}
+
+	public void setR_date(Date r_date) {
+		this.r_date = r_date;
+	}
+
+	
+	
+	
+	
+	
+	
+
+	
 	
 	
 	

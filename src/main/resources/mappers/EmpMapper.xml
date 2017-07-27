@@ -29,4 +29,15 @@
   	<select id="search" resultType="com.intranet.emp.EmpDTO" parameterType="java.lang.Integer">
   		select * from emp where emp_num=#{num}
   	</select>
+  	
+  	<select id="empLogin" parameterType="com.intranet.emp.EmpDTO" resultType="com.intranet.emp.EmpDTO">
+  	
+  		select * from emp where emp_id=#{emp_id} and emp_pw=#{emp_pw}
+  		
+  	</select>
+  	<update id="empPwUpdate" parameterType="java.lang.String">
+  	
+  		update emp set emp_pw=#{emp_pw} where emp_id=#{emp_id}
+  	
+  	</update>
   </mapper>

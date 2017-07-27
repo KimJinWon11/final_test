@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="PhotoMapper">
+  
+	<insert id="photoInsert" parameterType="com.intranet.photo.PhotoDTO">
+		insert into photo values(photo_seq.nextval,#{title},sysdate,0,#{writer},#{contents},#{fname})
+	</insert>
+	
+	<select id="photoSeq" resultType="java.lang.Integer">
+		select max(num) from photo
+	</select>
+  	
+  	<insert id="fileUpload" parameterType="com.intranet.photo.FileDTO">
+  		insert into upload values(#{fname},#{oname},#{num})
+  	</insert>
+  	
+  	<select id="count" resultType="java.lang.Integer">
+  		select count(nvl(num,0)) from photo
+  		
+  		
+  	</select>
+  	
+  	<select id="photoList" parameterType="com.intranet.util.ListInfo" resultType="com.intranet.photo.PhotoDTO">
+  		select * from 
+  		(select rownum r, p.* from 
+  		(select * from photo order by num desc) p)
+  		where r between #{startRow} and #{lastRow}
+  	
+  	</select>
+  	
+  	
+  	 <select id="photoView" parameterType="java.lang.Integer" resultType="com.intranet.photo.PhotoDTO">
+  		select * from photo where num=#{num}
+  	</select>
+  	
+  	
+  	<select id="photoFileView" parameterType="java.lang.Integer" resultType="com.intranet.photo.FileDTO">
+  		select * from upload where num=#{num}
+  	
+  	</select>  
+  	<update id="photoUpdate" parameterType="com.intranet.photo.PhotoDTO">
+  		update photo set title=#{title},fname=#{fname} where num=#{num}
+  	</update>
+  	
+  	<delete id="fileDelete" parameterType="java.lang.Integer">
+  	
+  		delete upload where num=#{num}
+  		
+  	</delete>
+  	
+  	
+  
+  </mapper>

@@ -68,11 +68,15 @@
 		padding: 0 1% 1% 1%;
 		display: inline-block;
 	}
-	#header_login a{
-		
+
+	#header_login a{		
 		color: white;
 		padding:5%;
 		display: inline-block;
+	}
+	#header_my{
+		margin-left: 10%;
+		
 	}
 	#header_logout{
 		

@@ -12,11 +12,20 @@ import com.intranet.util.ListSearch;
 public class EmpService {
 	@Autowired
 	private EmpDAO empDAO;
-	
+
 	public List<EmpDTO> empList(ListSearch listSearch){
 		return empDAO.empList(listSearch);
 	}
 	public EmpDTO empSearch(Integer num){
 		return empDAO.empSearch(num);
+	}
+
+
+	public EmpDTO empLogin(EmpDTO empDTO){
+
+		return empDAO.empLogin(empDTO);
+	}
+	public int empPwUpdate(EmpDTO empDTO){
+		return empDAO.empPwUpdate(empDTO);
 	}
 }

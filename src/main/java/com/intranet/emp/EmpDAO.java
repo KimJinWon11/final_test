@@ -22,4 +22,13 @@ public class EmpDAO {
 	public EmpDTO empSearch(Integer num){
 		return sqlSession.selectOne(NAMESPACE+"search", num);	
 	}
+	
+	public EmpDTO empLogin(EmpDTO empDTO){
+		
+		return sqlSession.selectOne(NAMESPACE+"empLogin", empDTO);
+	}
+	public int empPwUpdate(EmpDTO empDTO){
+		return sqlSession.update(NAMESPACE+"empPwUpdate", empDTO);
+	}
+	
 }

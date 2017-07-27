@@ -20,9 +20,17 @@
 			</div>
 			<div id="header_login">
 				<img class="header_user_img" alt="" src="${pageContext.request.contextPath}/resources/img/header/userProfile.png">
-				<a href="loginPage">로그인 한 사람</a>
-				<a id="header_logout" href="logOutPage">LOGOUT</a>
+				
+			
+				
+				<a id="header_my" href="${pageContext.request.contextPath}/myPage">${member.emp_name }</a>
+				<a id="header_logout" href="${pageContext.request.contextPath}/logout">LOGOUT</a>
+				
+					
+					
 			</div>
+			
+			
 		</div>
 	</header>
 

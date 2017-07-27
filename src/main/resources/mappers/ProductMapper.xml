@@ -9,16 +9,52 @@
   
   </resultMap>
   
+   <sql id="search">
+  <trim prefix="where" prefixOverrides="and || or">
+  		<if test="search == 'item'">
+  			 item like '%'||#{item}||'%' and in_date like '%'||#{in_date}||'%'
+  		</if>
+  		<if test="search == 'outsourcing'">
+  			outsourcing like '%'||#{outsourcing}||'%' and in_date like '%'||#{in_date}||'%'
+  		</if>
+  		<if test="search == 'outsourcingitem'">
+  			 outsourcing like '%'||#{outsourcing}||'%' and item like '%'||#{item}||'%' and in_date like '%'||#{in_date}||'%'
+  		</if>
+  		<if test="search == ''">
+  			 in_date like '%'||#{in_date}||'%'
+  		</if>
+  		</trim>
+  </sql>
+  
+  <insert id="productUpdate1" statementType="CALLABLE" parameterType="java.util.Map">
+  
+  { call productupdate1(#{productDTO.num, mode=IN}, #{productDTO.outsourcing, mode=IN}, #{productDTO.item, mode=IN}, #{productDTO.price, mode=IN}, #{productDTO.count, mode=IN}, #{productDTO.total_price, mode=IN}, #{productDTO.r_date, mode=IN}, #{result, mode=OUT, javaType=int, jdbcType=INTEGER}) }
+  
+  </insert>
+  <insert id="productUpdate2" statementType="CALLABLE" parameterType="java.util.Map">
+  
+  { call productupdate2(#{productDTO.num, mode=IN}, #{productDTO.outsourcing, mode=IN}, #{productDTO.item, mode=IN}, #{productDTO.price, mode=IN}, #{productDTO.count, mode=IN}, #{productDTO.total_price, mode=IN}, #{productDTO.r_date, mode=IN}, #{result, mode=OUT, javaType=int, jdbcType=INTEGER}) }
+  
+  </insert>
+  <insert id="productUpdate3" statementType="CALLABLE" parameterType="java.util.Map">
+  
+  { call productupdate3(#{productDTO.num, mode=IN}, #{productDTO.outsourcing, mode=IN}, #{productDTO.item, mode=IN}, #{productDTO.price, mode=IN}, #{productDTO.count, mode=IN}, #{productDTO.total_price, mode=IN}, #{productDTO.r_date, mode=IN}, #{result, mode=OUT, javaType=int, jdbcType=INTEGER}) }
+  
+  </insert>	
+  	
+  
   <insert id="insert" statementType="CALLABLE" parameterType="java.util.Map">
   
-  { call productinsert(#{productDTO.outsourcing, mode=IN}, #{productDTO.item, mode=IN}, #{productDTO.price, mode=IN}, #{productDTO.count, mode=IN}, #{productDTO.total_price, mode=IN}, #{result, mode=OUT, javaType=int, jdbcType=INTEGER}) }
+  { call productinsert(#{productDTO.outsourcing, mode=IN}, #{productDTO.item, mode=IN}, #{productDTO.price, mode=IN}, #{productDTO.count, mode=IN}, #{productDTO.total_price, mode=IN}, #{productDTO.r_date, mode=IN}, #{result, mode=OUT, javaType=int, jdbcType=INTEGER}) }
   
   </insert>
   
  
-  <select id="list" resultType="com.intranet.product.ProductDTO" parameterType="java.lang.String">
+  <select id="list" resultType="com.intranet.product.ProductDTO" parameterType="com.intranet.product.ProductDTO">
   
-  select * from product where in_date like '%'||#{in_date}||'%' order by in_date asc, num asc
+  select * from product
+  <include refid="search"/>
+  order by in_date asc, num asc
   
   </select>
   
@@ -27,11 +63,32 @@
   select distinct outsourcing from stock
   	
   </select>
+  <select id="sitemList" resultType="com.intranet.product.ProductDTO">
+  
+  select distinct item from stock
+  	
+  </select>
   
   <select id="itemList" parameterType="java.lang.String" resultType="com.intranet.product.ProductDTO">
   	select item from stock where outsourcing=#{outsourcing}
   </select>
   
-
+  <select id="pList" resultType="com.intranet.product.ProductDTO" parameterType="com.intranet.product.ProductDTO">
+  
+  	select * from product where outsourcing=#{outsourcing} and item=#{item}
+  	
+  </select>
+  
+  <select id="beforename" resultType="com.intranet.product.ProductDTO" parameterType="java.lang.Integer">
+	select * from product where num=#{num}
+  
+  </select>
+  
+	<update id="tcountUpdate" parameterType="com.intranet.product.ProductDTO">
+	
+	update product set total_count=total_count-#{count} where num=#{num}
+	
+	</update>
+  
   
   </mapper>

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.intranet.product.ProductDTO;
 import com.intranet.product.ProductService;
+import com.intranet.product.testDTO;
 
 @Controller
 @RequestMapping(value="/product/**")
@@ -27,42 +28,101 @@ public class ProductController {
 	@Inject
 	private ProductService productService;
 	
-	@RequestMapping(value="productList")
-	public String productList(Model model,String y, String m)throws Exception{
+	
+	
+	@RequestMapping(value="beforeData")
+	public @ResponseBody Map<String, Object> beforeData(int num)throws Exception{
 		
-		if(m.equals("0")){
-			m="12";
-			int y2 = Integer.parseInt(y)-1;
-			y=String.valueOf(y2);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beforeData", productService.beforeData(num));
+		ProductDTO productDTO=(ProductDTO) map.get("beforeData");
+		
+		
+		
+			
+		return map;
+	}
+	@RequestMapping(value="productUpdate")
+	public @ResponseBody Map<String, Object> productUpdate(ProductDTO productDTO)throws Exception{
+		
+		System.out.println(productDTO.getR_date());
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		productService.productUpdate(productDTO);
+		map.put("newdata", productService.beforeData(productDTO.getNum()));
+		
+		
+		
+			
+		return map;
+	}
+	
+	@RequestMapping(value="productList")
+	public String productList(Model model,ProductDTO productDTO,String y, String m)throws Exception{
+		
+		
+		
+		if(productDTO.getOutsourcing()==null&&productDTO.getItem()!=null){
+			productDTO.setSearch("item");
+			if(productDTO.getIn_date()==null){
+				productDTO.setIn_date("");
+			}
+		}else if(productDTO.getOutsourcing()!=null&&productDTO.getItem()==null){
+			productDTO.setSearch("outsourcing");
+			if(productDTO.getIn_date()==null){
+				productDTO.setIn_date("");
+			}
+		}else if(productDTO.getOutsourcing()!=null&&productDTO.getItem()!=null){
+			productDTO.setSearch("outsourcingitem");
+			if(productDTO.getIn_date()==null){
+				productDTO.setIn_date("");
+			}
+		}else if(productDTO.getOutsourcing()==null&&productDTO.getItem()==null){
+			productDTO.setSearch("");
+			if(productDTO.getIn_date()==null){
+				productDTO.setIn_date("");
+			}
 		}
-		if(m.equals("13")){
-			m="1";
-			int y2 = Integer.parseInt(y)+1;
-			y=String.valueOf(y2);
-		}
+		
+		
 		Calendar ca = Calendar.getInstance();
 		int curyear = ca.get(Calendar.YEAR);
-		int curmonth = ca.get(Calendar.MONTH);		
-		
-		int year = Integer.parseInt(y);
-		int month = Integer.parseInt(m)-1;
-	
-		
-		if(year>=curyear&&month>curmonth){
+		int curmonth = ca.get(Calendar.MONTH);
+		int year = 0;
+		int month = 0;
+		if((y==null&&m==null)||(y.equals("")&&m.equals(""))){
+			productDTO.setIn_date("");
 			
-			y=String.valueOf(curyear);
-			year=curyear;
-			m=String.valueOf(curmonth+1);
-			month=curmonth;
-		}
+			
+		}else{
 		
-		Date date = new Date(year, month, 1);
+		year = Integer.parseInt(y);
+		 month = Integer.parseInt(m)-1;
+		 
+		 if(year>=curyear&&month>curmonth){
+				
+				y=String.valueOf(curyear);
+				year=curyear;
+				m=String.valueOf(curmonth+1);
+				month=curmonth;
+			}
+		 
+		 Date date = new Date(year, month, 1);
 		SimpleDateFormat sd = new SimpleDateFormat("yy/MM");
+		String in_date = sd.format(date);
+		productDTO.setIn_date(in_date);
+		model.addAttribute("year", year);
+		model.addAttribute("month", month+1);
+		 
+		 
+		}	
 		
+
+
 		
-		model.addAttribute("year", y);
-		model.addAttribute("month", m);
-		model.addAttribute("list", productService.productList(sd.format(date)));
+		model.addAttribute("productDTO",productDTO);
+		model.addAttribute("list", productService.productList(productDTO));
 		
 		
 		
@@ -73,6 +133,16 @@ public class ProductController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", productService.outsourcingList());
+		
+		
+			
+		return map;
+	}
+	@RequestMapping(value="sitemList")
+	public @ResponseBody Map<String, Object> sitemList()throws Exception{
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", productService.sitemList());
 		
 		
 			
@@ -94,15 +164,14 @@ public class ProductController {
 	public String productInsert(RedirectAttributes rd, ProductDTO productDTO)throws Exception{
 		
 		int result = productService.productInsert(productDTO);
+
 		
-		Calendar ca = Calendar.getInstance();
-		int year = ca.get(Calendar.YEAR);
-		int month = ca.get(Calendar.MONTH)+1;
 		
 	
 	
-		return "redirect:productList?y="+year+"&m="+month;		
+		return "redirect:productList";		
 	}
+	
 	
 
 }

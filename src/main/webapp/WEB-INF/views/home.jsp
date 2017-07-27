@@ -7,6 +7,13 @@
 <head>
 
 	<c:import url="/resources/css/main.jsp"></c:import>
+	
+	<script type="text/javascript">
+var m = '${message}';
+if(m != ''){
+	alert(m);
+}
+</script>
 </head>
 <body>
 	
@@ -16,9 +23,11 @@
 		<div ID="login_menu">
 		<h1>LOGIN</h1>
 			<div id="login_form">
-				<p>ID:&nbsp;&nbsp;&nbsp;<input type="text" id="id" name="id"></p>
-				<p>PW: <input type="text" id="pw" name="pw"></p>
-				<a type="button" id="btn" class="btn-default" value="LOGIN" href="mainPage">LOGIN</a>
+				<form action="empLogin">
+					<p>ID:&nbsp;&nbsp;&nbsp;<input type="text" id="id" name="emp_id"></p>
+					<p>PW: <input type="text" id="pw" name="emp_pw"></p>
+					<input type="submit" id="btn" class="btn-default" value="LOGIN"></input>
+				</form>
 			</div>
 		</div>
 		<div id="main_title">
